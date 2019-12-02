@@ -1,4 +1,9 @@
+import random
+
+
 def pick_capital():
+    capitals=["Budapest","Wien","Rome"]
+    print(random.choice(capitals))
     '''
     Picks a random European capital
 
@@ -89,7 +94,9 @@ def get_input():
 
 
 def main():
+    pick_capital()
     pass
+
 
 if __name__ == '__main__':
     main()
