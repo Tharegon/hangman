@@ -38,20 +38,34 @@ def get_hashed(word):
     Args:
     str: The word to hash
 
-    Returns:
+    Returns:s
     str: The hashed password
     '''
     pass
 
 def uncover(hashed_password, password, letter):
+    HP = 10
+    sol = [""]
     RC=len(password)
-    LC=list(password)
-    for i in range(RC):
-     if LC[i] == letter:
-         print(LC[i], end =" ")
-     else:
-         print("_", end =" ")
     clear()
+    LC=list(password)
+    while HP > 0:
+        
+        for i in range(RC):
+            sol.append("_")
+            if LC[i] == letter:
+                sol[i] = LC[i]
+            else:
+                HP=HP-1
+            print(sol[i], end =" ")
+        if HP > 0:
+            get_input()
+            print(HP)
+        else:
+            print(HP)
+            break
+        print("\n")
+    
 
     
     '''
@@ -82,21 +96,11 @@ def update(used_letters, letter):
     pass
 
 
-def is_win(hashed_password, password):
-    '''
-    Checks if the hashed password is fully uncovered
-
-    Args:
-    str: The hashed password
-    str: The password
-
-    Returns:
-    bool:
-    '''
+def is_win(life, points, leng):
     pass
 
+#def is_loose(life_points):
 
-def is_loose(life_points):
     '''
     Checks if life points is equal 0
 
@@ -122,7 +126,8 @@ def get_input():
 
 
 def main():
-    info=pick_capital()
+    info = pick_capital()
+    infolen = len(info)
     uncover(get_hashed(info), info, get_input())
     pass
 
