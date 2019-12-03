@@ -2,8 +2,10 @@ import random
 
 
 def pick_capital():
-    capitals=["Budapest","Wien","Rome"]
-    print(random.choice(capitals))
+    capitals = ["Budapest", "Wien", "Rome"]
+    city = random.choice(capitals)
+    print(city)
+    return city
     '''
     Picks a random European capital
 
@@ -14,6 +16,13 @@ def pick_capital():
 
 
 def get_hashed(word):
+
+    letters = len(word)
+    x = 0
+    for x in range(letters):
+        print("_", end =" ")
+
+    print(" ")
     '''
     Generates a password based on the word with dashes instead of letters
     Keeps whitespaces undashed.
@@ -27,7 +36,11 @@ def get_hashed(word):
     pass
 
 
+
 def uncover(hashed_password, password, letter):
+    letter = raw_input("Enter your guess: ")
+    pick_capital()
+    
     '''
     Uncovers all occurences of the given letter in the hashed password based on the password
 
@@ -94,7 +107,7 @@ def get_input():
 
 
 def main():
-    pick_capital()
+    get_hashed(pick_capital())
     pass
 
 
