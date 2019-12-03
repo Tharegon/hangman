@@ -1,8 +1,16 @@
 import random
+import sys
+from os import system, name
 
+
+def clear():
+    if name == 'nt':
+        _ = system('cls')
+    else:
+        _ = system('clear')
 
 def pick_capital():
-    capitals = ["Budapest", "Wien", "Rome"]
+    capitals = ["BUDAPEST", "WIEN", "BERLIN"]
     city = random.choice(capitals)
     print(city)
     return city
@@ -35,11 +43,16 @@ def get_hashed(word):
     '''
     pass
 
-
-
 def uncover(hashed_password, password, letter):
-    letter = raw_input("Enter your guess: ")
-    pick_capital()
+    RC=len(password)
+    LC=list(password)
+    for i in range(RC):
+     if LC[i] == letter:
+         print(LC[i], end =" ")
+     else:
+         print("_", end =" ")
+    clear()
+
     
     '''
     Uncovers all occurences of the given letter in the hashed password based on the password
@@ -97,6 +110,8 @@ def is_loose(life_points):
 
 
 def get_input():
+    guess = input("Enter your guess: ")
+    return guess.upper()
     '''
     Reads a user input until it contains only letter
 
@@ -107,7 +122,8 @@ def get_input():
 
 
 def main():
-    get_hashed(pick_capital())
+    info=pick_capital()
+    uncover(get_hashed(info), info, get_input())
     pass
 
 
