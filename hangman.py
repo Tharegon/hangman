@@ -45,11 +45,14 @@ def get_hashed(word):
     pass
 
 def uncover(hashed_password, password, letter):
+    clear()
     hash_len = len(hashed_password)
+    smtg = True
     for i in range(hash_len):
         if letter == password[i]:
-            hashed_password[i] = password[i]
-    return hashed_password
+           hashed_password[i] = password[i]
+           smtg = False
+    return hashed_password, smtg
 
     '''
     Uncovers all occurences of the given letter in the hashed password based on the password
@@ -66,7 +69,8 @@ def uncover(hashed_password, password, letter):
 
 
 def update(used_letters, letter):
-    
+
+            
     '''
     Appends the letter to used_letters if it doesn't occur
 
@@ -86,7 +90,7 @@ def is_win(hashed_password, password):
 
 
 def is_loose(life_points):
-
+    return life_points <= 0
     '''
     Checks if life points is equal 0
 
@@ -96,12 +100,12 @@ def is_loose(life_points):
     Returns:
     bool: True if life point is equal 0, False otherwise
     '''
-    pass
 
 
 def get_input():
     guess = input("Enter your guess: ")
     if guess.isalpha() is True:
+        clear()
         return guess.upper()
     else:
         print("Not a letter, please try again.")
@@ -116,15 +120,28 @@ def get_input():
 
 
 def main():
-    counter = 0
+    clear()
+    print("Welcome to HANGMAN!")
+    HP = 10
+    used = []
     citypass = pick_capital()
     hashed = get_hashed(citypass)
-    print(get_hashed(citypass))
+    print("Guess this city: ", get_hashed(citypass))
     
     while True:
         userinput = get_input()
-        print(uncover(hashed, citypass, userinput))
+        used.append(userinput)
+        hashed, smtg = uncover(hashed, citypass, userinput)
+        print("Guess this city: ", hashed)
+        print("Current Health: ", HP)
+        print("Letters already used: ", used)
+        if smtg:
+            HP -= 1
+        if is_loose(HP):
+            print("Sorry, no more lives left. GAME OVER")    
+            break
         if is_win(citypass, hashed):
+            print("Congratulation! Time for celebration!")
             break
     pass
 
