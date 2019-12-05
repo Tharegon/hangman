@@ -10,9 +10,9 @@ def clear():
         _ = system('clear')
 
 def pick_capital():
-    capitals = ["BUDAPEST", "WIEN", "BERLIN"]
+    capitals = ["BUDAPEST", "WIEN", "LONDON"]
     city = random.choice(capitals)
-    print(city)
+    city = list(city)
     return city
     '''
     Picks a random European capital
@@ -26,11 +26,12 @@ def pick_capital():
 def get_hashed(word):
 
     letters = len(word)
-    x = 0
+    hashed_city = []
     for x in range(letters):
-        print("_", end =" ")
+        hashed_city.append("_")
+    
+    return hashed_city
 
-    print(" ")
     '''
     Generates a password based on the word with dashes instead of letters
     Keeps whitespaces undashed.
@@ -44,31 +45,12 @@ def get_hashed(word):
     pass
 
 def uncover(hashed_password, password, letter):
-    HP = 10
-    sol = [""]
-    RC=len(password)
-    clear()
-    LC=list(password)
-    while HP > 0:
-        c = 0
-        for i in range(RC):
-            sol.append("_")
-            if LC[i] == letter:
-                sol[i] = LC[i]
-                c = 1            
-            print(sol[i], end =" ")
-            if c == 0 :
-                HP = HP - 1
-        if HP > 0:
-            get_input()
-            print(HP)
-        else:
-            print(HP)
-            break
-        print("\n")
-    
+    hash_len = len(hashed_password)
+    for i in range(hash_len):
+        if letter == password[i]:
+            hashed_password[i] = password[i]
+    return hashed_password
 
-    
     '''
     Uncovers all occurences of the given letter in the hashed password based on the password
 
@@ -84,6 +66,7 @@ def uncover(hashed_password, password, letter):
 
 
 def update(used_letters, letter):
+    
     '''
     Appends the letter to used_letters if it doesn't occur
 
@@ -97,8 +80,10 @@ def update(used_letters, letter):
     pass
 
 
-def is_win(life, points, leng):
+def is_win(hashed_password, password):
+    return hashed_password == password
     pass
+
 
 def is_loose(life_points):
 
@@ -131,9 +116,16 @@ def get_input():
 
 
 def main():
-    info = pick_capital()
-    infolen = len(info)
-    uncover(get_hashed(info), info, get_input())
+    counter = 0
+    citypass = pick_capital()
+    hashed = get_hashed(citypass)
+    print(get_hashed(citypass))
+    
+    while True:
+        userinput = get_input()
+        print(uncover(hashed, citypass, userinput))
+        if is_win(citypass, hashed):
+            break
     pass
 
 
