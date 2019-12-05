@@ -56,7 +56,7 @@ def uncover(hashed_password, password, letter):
             if LC[i] == letter:
                 sol[i] = LC[i]
                 c = 1            
-            print(sol[i], end =" ")
+            print(sol[i], end ="The hashed password with uncovered letter ")
             if c == 0 :
                 HP = HP - 1
         if HP > 0:
@@ -132,10 +132,11 @@ def get_input():
 
 def main():
     info = pick_capital()
-    infolen = len(info)
+    #infolen = len(info)
     uncover(get_hashed(info), info, get_input())
     pass
 
 
 if __name__ == '__main__':
     main()
+
