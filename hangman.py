@@ -109,7 +109,8 @@ def get_input():
         return guess.upper()
     else:
         print("Not a letter, please try again.")
-        get_input
+        return get_input()
+        #while ciklussal érthetőbb
     '''
     Reads a user input until it contains only letter
 
@@ -133,10 +134,10 @@ def main():
         used.append(userinput)
         hashed, smtg = uncover(hashed, citypass, userinput)
         print("Guess this city: ", hashed)
-        print("Current Health: ", HP)
         print("Letters already used: ", used)
         if smtg:
             HP -= 1
+        print("Current Health: ", HP)
         if is_loose(HP):
             print("Sorry, no more lives left. GAME OVER")    
             break
